@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
-  WPI_VictorSPX driveMotorFL = new WPI_VictorSPX(Constants.DRIVE_FL);
-  WPI_TalonSRX driveMotorRL = new WPI_TalonSRX(Constants.DRIVE_RL);
+  WPI_TalonSRX driveMotorFL = new WPI_TalonSRX(Constants.DRIVE_FL);
+  WPI_VictorSPX driveMotorRL = new WPI_VictorSPX(Constants.DRIVE_RL);
   WPI_TalonSRX driveMotorFR = new WPI_TalonSRX(Constants.DRIVE_FR);
   WPI_VictorSPX driveMotorRR = new WPI_VictorSPX(Constants.DRIVE_RR);
 

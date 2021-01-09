@@ -9,13 +9,12 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Hopper extends SubsystemBase {
-  WPI_VictorSPX hopperMotorL = new WPI_VictorSPX(Constants.HOPPER_L);
+  WPI_TalonSRX hopperMotorL = new WPI_TalonSRX(Constants.HOPPER_L);
   WPI_TalonSRX hopperMotorR = new WPI_TalonSRX(Constants.HOPPER_R);
 
   /**

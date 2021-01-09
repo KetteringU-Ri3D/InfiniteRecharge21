@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,7 +17,7 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
   WPI_TalonFX shooterMotorR = new WPI_TalonFX(Constants.SHOOTER_R);
   WPI_TalonFX shooterMotorL = new WPI_TalonFX(Constants.SHOOTER_L);
-  WPI_VictorSPX feederMotor = new WPI_VictorSPX(Constants.SHOOTER_F);
+  WPI_TalonSRX feederMotor = new WPI_TalonSRX(Constants.SHOOTER_F);
 
   /**
    * Shooter object
