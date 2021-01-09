@@ -16,21 +16,21 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * ArcadeDrive command using methods from the Drivetrain subsystem
  */
-public class ArcadeDrive extends CommandBase {
+public class TankDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain drivetrain;
-  private final DoubleSupplier throttle, rotation;
+  private final DoubleSupplier left, right;
 
   /**
-   * ArcadeDrive command, allows the robot to be controlled using arcade controls
+   * TankDrive command, allows the robot to be controlled using tank controls
    * Drivetrain subsystem: @param drivetrain
-   * Speed of moving forwards/backwards: @param throttle
-   * Speed of rotation: @param rotation
+   * Speed of the drivetrain motors on the left side: @param left
+   * Speed of the drivetrain motors on the right side: @param right
    */
-  public ArcadeDrive(Drivetrain drivetrain, DoubleSupplier throttle, DoubleSupplier rotation) {
+  public TankDrive(Drivetrain drivetrain, DoubleSupplier left, DoubleSupplier right) {
     this.drivetrain = drivetrain;
-    this.throttle = throttle;
-    this.rotation = rotation;
+    this.left = left;
+    this.right = right;
     addRequirements(drivetrain);
   }
 
@@ -42,7 +42,7 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.arcadeDrive(throttle.getAsDouble(), rotation.getAsDouble());
+    drivetrain.tankDrive(left.getAsDouble(), right.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

@@ -16,4 +16,29 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    // Drivetrain motors and encoders
+    public static final int DRIVE_FR = 1;
+    public static final int DRIVE_RR = 2;
+    public static final int DRIVE_FL = 3;
+    public static final int DRIVE_RL = 4;
+    public static final int DRIVE_ENCODER_R = 2;
+    public static final int DRIVE_ENCODER_L = 4;
+
+    // Shooter motors
+    public static final int SHOOTER_R = 5;
+    public static final int SHOOTER_L = 6;
+    public static final int SHOOTER_F = 10;
+    
+    // Intake motor
+    public static final int COLLECTOR = 7;
+
+    // Hopper motors
+    public static final int HOPPER_R = 8;
+    public static final int HOPPER_L = 9;
+
+    // Climber motor
+    public static final int CLIMBER = 11;
+
+    // Gamepad
+    public static final int GAMEPAD = 0;
 }

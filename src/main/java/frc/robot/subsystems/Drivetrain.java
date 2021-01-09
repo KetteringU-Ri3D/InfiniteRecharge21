@@ -7,14 +7,54 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
+  WPI_VictorSPX driveMotorFL = new WPI_VictorSPX(Constants.DRIVE_FL);
+  WPI_TalonSRX driveMotorRL = new WPI_TalonSRX(Constants.DRIVE_RL);
+  WPI_TalonSRX driveMotorFR = new WPI_TalonSRX(Constants.DRIVE_FR);
+  WPI_VictorSPX driveMotorRR = new WPI_VictorSPX(Constants.DRIVE_RR);
+
+  SpeedControllerGroup driveLeft = new SpeedControllerGroup(driveMotorFL, driveMotorRL);
+  SpeedControllerGroup driveRight = new SpeedControllerGroup(driveMotorFR, driveMotorRR);
+
+  DifferentialDrive drive = new DifferentialDrive(driveLeft, driveRight);
+
   /**
-   * Creates a new ExampleSubsystem.
+   * Drivetrain object
    */
   public Drivetrain() {
+  }
 
+  /**
+   * Arcade drive control
+   * Speed of moving forwards/backwards: @param throttle
+   * Speed of rotation: @param rotation
+   */
+  public void arcadeDrive(double throttle, double rotation) {
+    drive.arcadeDrive(throttle, rotation);
+  }
+
+  /**
+   * Tank drive control
+   * Speed of the drivetrain motors on the left side: @param left
+   * Speed of the drivetrain motors on the right side: @param right
+   */
+  public void tankDrive(double left, double right) {
+    drive.tankDrive(left, right);
+  }
+
+  /**
+   * Stops the drivetrain motors
+   */
+  public void stopDrive(){
+    drive.stopMotor();
   }
 
   @Override
