@@ -16,13 +16,11 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Drivetrain motors and encoders
+    // Drivetrain motors
     public static final int DRIVE_FR = 1;
     public static final int DRIVE_RR = 2;
     public static final int DRIVE_FL = 3;
     public static final int DRIVE_RL = 4;
-    public static final int DRIVE_ENCODER_R = 2;
-    public static final int DRIVE_ENCODER_L = 4;
 
     // Shooter motors
     public static final int SHOOTER_R = 5;
@@ -41,4 +39,12 @@ public final class Constants {
 
     // Gamepad
     public static final int GAMEPAD = 0;
+
+    // Gyro PID values
+    public static final boolean GYRO_REVERSED = false;
+    public static final double kP = 0.0;
+    public static final double kI = 0.0;
+    public static final double kD = 0.0;
+    public static final double kTurnTolerance = 5;
+    public static final double kTurnRateTolerance = 10;
 }
