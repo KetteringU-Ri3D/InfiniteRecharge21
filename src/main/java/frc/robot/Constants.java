@@ -19,8 +19,8 @@ public final class Constants {
     // Drivetrain motors
     public static final int DRIVE_FR = 1;
     public static final int DRIVE_RR = 2;
-    public static final int DRIVE_FL = 3;
-    public static final int DRIVE_RL = 4;
+    public static final int DRIVE_FL = 4;
+    public static final int DRIVE_RL = 3;
 
     // Shooter motors
     public static final int SHOOTER_R = 5;
