@@ -11,8 +11,16 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.climber.LowerClimber;
+import frc.robot.commands.climber.RaiseClimber;
+import frc.robot.commands.collector.Collect;
+import frc.robot.commands.collector.Eject;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.TankDrive;
+import frc.robot.commands.hopper.HopperIn;
+import frc.robot.commands.hopper.HopperOut;
+import frc.robot.commands.shooter.ShooterIn;
+import frc.robot.commands.shooter.ShooterOut;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
@@ -71,7 +79,24 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+
+    // Controls for the collector and shooter.
+
+    // Set up collector so intake is independent of the hopper.
+    gamepad.getRightShoulder().whileHeld(new Collect(collector, 25));
+
+    // Set up all eject commands so they all work from one button.
+    gamepad.getLeftTriggerClick().whileHeld(new Eject(collector, 25));
+    gamepad.getLeftTriggerClick().whileHeld(new ShooterIn(shooter, 50));
+    gamepad.getLeftTriggerClick().whileHeld(new HopperOut(hopper, 50));
+
+    // Set up the hopper and shooter so they work off the same button.
+    gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, 50));
+    gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, 50));
+
+    // Controls for the climber.
+    gamepad.getButtonY().whileHeld(new RaiseClimber(climber, 100));
+    gamepad.getButtonX().whileHeld(new LowerClimber(climber, 100));
   }
 
   /**
