@@ -41,66 +41,6 @@ public class Drivetrain extends SubsystemBase {
     driveMotorFR.setNeutralMode(NeutralMode.Brake);
     driveMotorRL.setNeutralMode(NeutralMode.Brake);
     driveMotorRR.setNeutralMode(NeutralMode.Brake);
-
-    // Mag encoders
-    driveMotorFL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
-                                              Constants.PID_LOOP_IDX,
-                                              Constants.TIMEOUT_MS);
-    driveMotorFR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
-                                              Constants.PID_LOOP_IDX,
-                                              Constants.TIMEOUT_MS);
-
-    // Setting each VictorSPX to follow the TalonSRX on the same side of the drivetrain
-    driveMotorRL.follow(driveMotorFL);
-    driveMotorRR.follow(driveMotorFR);
-    // Set sensor phase to true, ensuring that the sensor value
-    // is positive when the output value is positive
-    driveMotorFL.setSensorPhase(Constants.SENSOR_PHASE);
-    driveMotorFR.setSensorPhase(Constants.SENSOR_PHASE);
-
-    // Reverse left drive encoder and leave right drive encoder as is
-    driveMotorFL.setInverted(Constants.MOTOR_REVERSED);
-
-    // Set peak and nominal outputs
-    driveMotorFL.configNominalOutputForward(0, Constants.TIMEOUT_MS);
-    driveMotorFL.configNominalOutputReverse(0, Constants.TIMEOUT_MS);
-    driveMotorFL.configPeakOutputForward(1, Constants.TIMEOUT_MS);
-    driveMotorFL.configPeakOutputReverse(-1, Constants.TIMEOUT_MS);
-    driveMotorFR.configNominalOutputForward(0, Constants.TIMEOUT_MS);
-    driveMotorFR.configNominalOutputReverse(0, Constants.TIMEOUT_MS);
-    driveMotorFR.configPeakOutputForward(1, Constants.TIMEOUT_MS);
-    driveMotorFR.configPeakOutputReverse(-1, Constants.TIMEOUT_MS);
-
-    // Set allowable closed-loop error; output will be neutral in the range
-    driveMotorFL.configAllowableClosedloopError(0, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
-    driveMotorFR.configAllowableClosedloopError(0, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
-
-    // Set closed loop position gains. kF is generally zero
-    driveMotorFL.config_kF(Constants.PID_LOOP_IDX, Constants.gains.kF, Constants.TIMEOUT_MS);
-    driveMotorFL.config_kP(Constants.PID_LOOP_IDX, Constants.gains.kP, Constants.TIMEOUT_MS);
-    driveMotorFL.config_kI(Constants.PID_LOOP_IDX, Constants.gains.kI, Constants.TIMEOUT_MS);
-    driveMotorFL.config_kD(Constants.PID_LOOP_IDX, Constants.gains.kD, Constants.TIMEOUT_MS);
-    driveMotorFR.config_kF(Constants.PID_LOOP_IDX, Constants.gains.kF, Constants.TIMEOUT_MS);
-    driveMotorFR.config_kP(Constants.PID_LOOP_IDX, Constants.gains.kP, Constants.TIMEOUT_MS);
-    driveMotorFR.config_kI(Constants.PID_LOOP_IDX, Constants.gains.kI, Constants.TIMEOUT_MS);
-    driveMotorFR.config_kD(Constants.PID_LOOP_IDX, Constants.gains.kD, Constants.TIMEOUT_MS);
-    
-    // Get the 360deg position of the encoder
-    int absPosLeft = driveMotorFL.getSensorCollection().getPulseWidthPosition();
-    int absPosRight = driveMotorFR.getSensorCollection().getPulseWidthPosition();
-
-    // Keep bottom 12 bits only
-    absPosLeft &= 0xFFF;
-    if(Constants.SENSOR_PHASE) { absPosLeft *= -1; }
-    if(Constants.MOTOR_REVERSED) { absPosLeft *= -1; }
-
-    absPosRight &= 0xFFF;
-    if(Constants.SENSOR_PHASE) { absPosRight *= -1; }
-    if(Constants.MOTOR_REVERSED) { absPosRight *= -1; }
-
-    // Match the relative sensor positions to the absolute positions
-    driveMotorFL.setSelectedSensorPosition(absPosLeft, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
-    driveMotorFR.setSelectedSensorPosition(absPosRight, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
   }
 
   /**
@@ -119,11 +59,6 @@ public class Drivetrain extends SubsystemBase {
    */
   public void tankDrive(double left, double right) {
     drive.tankDrive(left, right);
-  }
-
-  public void driveToPosition(int position) {
-    driveMotorFL.set(ControlMode.Position, -position);
-    driveMotorFR.set(ControlMode.Position, position);
   }
 
   /**
