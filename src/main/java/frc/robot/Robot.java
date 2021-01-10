@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.leds.SetLeds;
+import frc.robot.enums.LedEnums;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -19,8 +21,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
+  private SetLeds setLedCommand;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -28,8 +30,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
+    setLedCommand = new SetLeds();
+    setLedCommand.setLeds(LedEnums.Red);
     m_robotContainer = new RobotContainer();
   }
 
@@ -66,6 +68,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    setLedCommand.setLeds(LedEnums.Blue);
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -86,6 +89,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    setLedCommand.setLeds(LedEnums.ColorWavesRainbowPalette);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
