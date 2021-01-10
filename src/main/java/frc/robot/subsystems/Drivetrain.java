@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -30,6 +31,11 @@ public class Drivetrain extends SubsystemBase {
    * Drivetrain object
    */
   public Drivetrain() {
+    // Set drive motors to Brake mode
+    driveMotorFL.setNeutralMode(NeutralMode.Brake);
+    driveMotorFR.setNeutralMode(NeutralMode.Brake);
+    driveMotorRL.setNeutralMode(NeutralMode.Brake);
+    driveMotorRR.setNeutralMode(NeutralMode.Brake);
   }
 
   /**
