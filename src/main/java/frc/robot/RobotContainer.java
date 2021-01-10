@@ -81,6 +81,9 @@ public class RobotContainer {
   private double getGamepadLeftY() {
     double y = gamepad.getLeftY();
     SmartDashboard.putNumber("GamepadLeftY", y);
+    if(Math.abs(y) < 0.1) {
+      y = 0;
+    }
     return y;
   }
 
@@ -91,6 +94,9 @@ public class RobotContainer {
   private double getGamepadRightY() {
     double y = gamepad.getRightY();
     SmartDashboard.putNumber("GamepadRightY", y);
+    if(Math.abs(y) < 0.1) {
+      y = 0;
+    }
     return y;
   }
 
@@ -101,6 +107,9 @@ public class RobotContainer {
   private double getGamepadRightX() {
     double x = gamepad.getRightX();
     SmartDashboard.putNumber("GamepadRigthX", x);
+    if(Math.abs(x) < 0.1) {
+      x = 0;
+    }
     return x;
   }
 
