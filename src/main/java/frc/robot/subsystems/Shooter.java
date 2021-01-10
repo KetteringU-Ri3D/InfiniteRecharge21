@@ -17,7 +17,7 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
   WPI_TalonFX shooterMotorR = new WPI_TalonFX(Constants.SHOOTER_R);
   WPI_TalonFX shooterMotorL = new WPI_TalonFX(Constants.SHOOTER_L);
-  WPI_TalonSRX feederMotor = new WPI_TalonSRX(Constants.SHOOTER_F);
+  WPI_TalonSRX feederMotor = new WPI_TalonSRX(Constants.FEEDER);
 
   /**
    * Shooter object
@@ -43,12 +43,36 @@ public class Shooter extends SubsystemBase {
     shooterMotorR.set(ControlMode.PercentOutput, -power);
   }
 
+  /**
+   * Spin the feeder motor inward to bring power cells from the hopper
+   * into the shooter
+   * Power applied to the motor: @param power
+   */
+  public void feederIn(double power) {
+    feederMotor.set(ControlMode.PercentOutput, power);
+  }
+
+  /**
+   * Spin the feeder motor outward if necessary
+   * Power applied to the motor: @param power
+   */
+  public void feederOut(double power) {
+    feederMotor.set(ControlMode.PercentOutput, power);
+  }
+
   /** 
    * Stop the shooter motors
    */
   public void shooterStop() {
     shooterMotorL.stopMotor();
     shooterMotorR.stopMotor();
+  }
+
+  /** 
+   * Stop the feeder motor
+   */
+  public void feederStop() {
+    feederMotor.stopMotor();
   }
 
   @Override

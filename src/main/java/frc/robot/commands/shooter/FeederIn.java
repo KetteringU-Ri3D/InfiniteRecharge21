@@ -5,24 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.climber;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Shooter;
 
-public class LowerClimber extends CommandBase {
-  private final Climber climber;
+public class FeederIn extends CommandBase {
+  private final Shooter shooter;
   private final double power;
-
+  
   /**
-   * LowerClimber command, allows the driver to hang once they are ready
-   * Climber subsytem: @param climber
-   * Power applied to the motor: @param power
+   * FeederIn command, moves power cells from the hopper to the shooter
+   * Shooter subsystem: @param shooter
+   * Power applied to the motors: @param power
    */
-  public LowerClimber(Climber climber, double power) {
-    this.climber = climber;
+  public FeederIn(Shooter shooter, double power) {
+    this.shooter = shooter;
     this.power = power;
-    addRequirements(climber);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -33,13 +33,13 @@ public class LowerClimber extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.lowerClimber(power);
+    shooter.feederIn(power);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.stopClimber();
+    shooter.feederStop();
   }
 
   // Returns true when the command should end.

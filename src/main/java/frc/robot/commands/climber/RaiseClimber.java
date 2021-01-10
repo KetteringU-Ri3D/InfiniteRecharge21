@@ -7,21 +7,19 @@
 
 package frc.robot.commands.climber;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 public class RaiseClimber extends CommandBase {
   private final Climber climber;
-  private final DoubleSupplier power;
+  private final double power;
 
   /**
    * RaiseClimber command, allows the driver to prepare to hang
    * Climber subsytem: @param climber
    * Power applied to the motor: @param power
    */
-  public RaiseClimber(Climber climber, DoubleSupplier power) {
+  public RaiseClimber(Climber climber, double power) {
     this.climber = climber;
     this.power = power;
     addRequirements(climber);
@@ -35,7 +33,7 @@ public class RaiseClimber extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.raiseClimber(power.getAsDouble());
+    climber.raiseClimber(power);
   }
 
   // Called once the command ends or is interrupted.

@@ -7,21 +7,19 @@
 
 package frc.robot.commands.collector;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Collector;
 
 public class Collect extends CommandBase {
   private final Collector collector;
-  private final DoubleSupplier power;
+  private final double power;
 
   /**
    * Collect command, allows the driver to collect power cells
    * Collector subsystem: @param collector
    * Power applied to the motor: @param power
    */
-  public Collect(Collector collector, DoubleSupplier power) {
+  public Collect(Collector collector, double power) {
     this.collector = collector;
     this.power = power;
     addRequirements(collector);
@@ -35,7 +33,7 @@ public class Collect extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    collector.collect(power.getAsDouble());
+    collector.collect(power);
   }
 
   // Called once the command ends or is interrupted.
