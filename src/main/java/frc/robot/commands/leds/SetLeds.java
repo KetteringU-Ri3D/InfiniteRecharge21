@@ -7,7 +7,7 @@ import frc.robot.subsystems.Led;
 
 public class SetLeds extends CommandBase {
 
-    public Led ledSubsystem;
+    public static Led ledSubsystem;
 
     public SetLeds(LedEnums ledEnumValue) {
         ledSubsystem = new Led(9);
