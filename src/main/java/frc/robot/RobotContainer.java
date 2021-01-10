@@ -19,6 +19,8 @@ import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.TankDrive;
 import frc.robot.commands.hopper.HopperIn;
 import frc.robot.commands.hopper.HopperOut;
+import frc.robot.commands.shooter.FeederOut;
+import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShooterIn;
 import frc.robot.commands.shooter.ShooterOut;
 import frc.robot.subsystems.Climber;
@@ -57,7 +59,7 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
       new ArcadeDrive(
         drivetrain, 
-        () -> getGamepadLeftY(),
+        () -> -getGamepadLeftY(),
         () -> getGamepadRightX()
       )
     );
@@ -83,20 +85,22 @@ public class RobotContainer {
     // Controls for the collector and shooter.
 
     // Set up collector so intake is independent of the hopper.
-    gamepad.getRightShoulder().whileHeld(new Collect(collector, 25));
+    gamepad.getRightShoulder().whileHeld(new Collect(collector, 0.25));
 
     // Set up all eject commands so they all work from one button.
-    gamepad.getLeftTriggerClick().whileHeld(new Eject(collector, 25));
-    gamepad.getLeftTriggerClick().whileHeld(new ShooterIn(shooter, 50));
-    gamepad.getLeftTriggerClick().whileHeld(new HopperOut(hopper, 50));
+    gamepad.getLeftTriggerClick().whileHeld(new Eject(collector, 0.25));
+    gamepad.getLeftTriggerClick().whileHeld(new ShooterIn(shooter, 0.5));
+    gamepad.getLeftTriggerClick().whileHeld(new FeederOut(shooter, 0.5));
+    gamepad.getLeftTriggerClick().whileHeld(new HopperOut(hopper, 0.5));
 
     // Set up the hopper and shooter so they work off the same button.
-    gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, 50));
-    gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, 50));
+    gamepad.getRightTriggerClick().whileHeld(new Shoot());
+    // gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, 50));
+    // gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, 50));
 
     // Controls for the climber.
-    gamepad.getButtonY().whileHeld(new RaiseClimber(climber, 100));
-    gamepad.getButtonX().whileHeld(new LowerClimber(climber, 100));
+    gamepad.getButtonY().whileHeld(new RaiseClimber(climber, 1));
+    gamepad.getButtonX().whileHeld(new LowerClimber(climber, 1));
   }
 
   /**
