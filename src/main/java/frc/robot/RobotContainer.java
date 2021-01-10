@@ -79,6 +79,9 @@ public class RobotContainer {
    */
   private double getGamepadLeftY() {
     double y = gamepad.getLeftY();
+    if(Math.abs(y) < 0.1) {
+      y = 0;
+    }
     return y;
   }
 
@@ -88,6 +91,9 @@ public class RobotContainer {
    */
   private double getGamepadRightY() {
     double y = gamepad.getRightY();
+    if(Math.abs(y) < 0.1) {
+      y = 0;
+    }
     return y;
   }
 
@@ -97,6 +103,9 @@ public class RobotContainer {
    */
   private double getGamepadRightX() {
     double x = gamepad.getRightX();
+    if(Math.abs(x) < 0.1) {
+      x = 0;
+    }
     return x;
   }
 
