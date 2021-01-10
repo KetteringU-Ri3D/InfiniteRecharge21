@@ -5,9 +5,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.enums.LedEnums;
 
 public class Led extends SubsystemBase {
-
-
-
     private static Spark blinkin = null;
         
     public Led(int pwmPort) {
