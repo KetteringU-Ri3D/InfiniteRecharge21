@@ -15,6 +15,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Led;
 import frc.robot.subsystems.Shooter;
 import frc.robot.utils.Gamepad;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,6 +33,7 @@ public class RobotContainer {
   private final Collector collector = new Collector();
   private final Hopper hopper = new Hopper();
   private final Climber climber = new Climber();
+  private final Led led = new Led(9);
 
   Gamepad gamepad = new Gamepad(Constants.GAMEPAD);
 
