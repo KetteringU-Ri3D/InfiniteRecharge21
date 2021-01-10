@@ -11,6 +11,7 @@ import frc.robot.subsystems.Drivetrain;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -42,6 +43,8 @@ public class TankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putNumber("DriveTrainLeft", left.getAsDouble());
+    SmartDashboard.putNumber("DriveTrainRight", right.getAsDouble());
     drivetrain.tankDrive(left.getAsDouble(), right.getAsDouble());
   }
 

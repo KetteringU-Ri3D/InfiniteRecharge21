@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.TankDrive;
@@ -70,7 +71,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    
   }
 
   /**
@@ -79,6 +80,7 @@ public class RobotContainer {
    */
   private double getGamepadLeftY() {
     double y = gamepad.getLeftY();
+    SmartDashboard.putNumber("GamepadLeftY", y);
     return y;
   }
 
@@ -88,6 +90,7 @@ public class RobotContainer {
    */
   private double getGamepadRightY() {
     double y = gamepad.getRightY();
+    SmartDashboard.putNumber("GamepadRightY", y);
     return y;
   }
 
@@ -97,6 +100,7 @@ public class RobotContainer {
    */
   private double getGamepadRightX() {
     double x = gamepad.getRightX();
+    SmartDashboard.putNumber("GamepadRigthX", x);
     return x;
   }
 

@@ -7,6 +7,7 @@
 
 package frc.robot.commands.hopper;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hopper;
 
@@ -33,6 +34,7 @@ public class HopperIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putNumber("HopperInPower", power);
     hopper.hopperIn(power);
   }
 

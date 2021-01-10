@@ -8,9 +8,7 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.collector.Collect;
 import frc.robot.commands.hopper.HopperIn;
-import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
