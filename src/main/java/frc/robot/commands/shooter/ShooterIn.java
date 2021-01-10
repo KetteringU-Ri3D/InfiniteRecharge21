@@ -7,20 +7,22 @@
 
 package frc.robot.commands.shooter;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterIn extends CommandBase {
   private final Shooter shooter;
-  private final double power;
+  private final DoubleSupplier power;
 
   /**
    * ShooterIn command, allows the driver to reverse the shooter if necessary
    * Shooter subsystem: @param shooter
    * Power applied to the motors: @param power
    */
-  public ShooterIn(Shooter shooter, double power) {
+  public ShooterIn(Shooter shooter, DoubleSupplier power) {
     this.shooter = shooter;
     this.power = power;
     addRequirements(shooter);
@@ -35,8 +37,8 @@ public class ShooterIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("ShooterInPower", power);
-    shooter.shooterIn(power);
+    SmartDashboard.putNumber("ShooterInPower", power.getAsDouble());
+    shooter.shooterIn(power.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

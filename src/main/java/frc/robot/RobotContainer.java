@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.climber.LowerClimber;
 import frc.robot.commands.climber.RaiseClimber;
 import frc.robot.commands.collector.Collect;
+import frc.robot.commands.collector.CollectorArmIn;
+import frc.robot.commands.collector.CollectorArmOut;
 import frc.robot.commands.collector.Eject;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.TankDrive;
@@ -85,13 +87,13 @@ public class RobotContainer {
     // Controls for the collector and shooter.
 
     // Set up collector so intake is independent of the hopper.
-    gamepad.getRightShoulder().whileHeld(new Collect(collector, 0.25));
+    gamepad.getRightShoulder().whileHeld(new Collect(collector, () -> 0.25));
 
     // Set up all eject commands so they all work from one button.
-    gamepad.getLeftTriggerClick().whileHeld(new Eject(collector, 0.25));
-    gamepad.getLeftTriggerClick().whileHeld(new ShooterIn(shooter, 0.5));
-    gamepad.getLeftTriggerClick().whileHeld(new FeederOut(shooter, 0.5));
-    gamepad.getLeftTriggerClick().whileHeld(new HopperOut(hopper, 0.5));
+    gamepad.getLeftTriggerClick().whileHeld(new Eject(collector, () -> 0.25));
+    gamepad.getLeftTriggerClick().whileHeld(new ShooterIn(shooter, () -> 0.5));
+    gamepad.getLeftTriggerClick().whileHeld(new FeederOut(shooter, () -> 0.5));
+    gamepad.getLeftTriggerClick().whileHeld(new HopperOut(hopper, () -> 0.5));
 
     // Set up the hopper and shooter so they work off the same button.
     gamepad.getRightTriggerClick().whileHeld(new Shoot());
@@ -99,8 +101,12 @@ public class RobotContainer {
     // gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, 50));
 
     // Controls for the climber.
-    gamepad.getButtonY().whileHeld(new RaiseClimber(climber, 1));
-    gamepad.getButtonX().whileHeld(new LowerClimber(climber, 1));
+    gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
+    gamepad.getButtonX().whileHeld(new LowerClimber(climber, () -> 1));
+
+    // Temporary pneumatic controls
+    gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
+    gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
   }
 
   /**

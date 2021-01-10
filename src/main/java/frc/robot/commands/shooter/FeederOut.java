@@ -7,20 +7,22 @@
 
 package frc.robot.commands.shooter;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class FeederOut extends CommandBase {
   private final Shooter shooter;
-  private final double power;
+  private final DoubleSupplier power;
   
   /**
    * FeederOut command, moves power cells back towards the hopper if necessary
    * Shooter subsystem: @param shooter
    * Power applied to the motors: @param power
    */
-  public FeederOut(Shooter shooter, double power) {
+  public FeederOut(Shooter shooter, DoubleSupplier power) {
     this.shooter = shooter;
     this.power = power;
     addRequirements(shooter);
@@ -34,8 +36,8 @@ public class FeederOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("FeederOutPower", power);
-    shooter.feederOut(power);
+    SmartDashboard.putNumber("FeederOutPower", power.getAsDouble());
+    shooter.feederOut(power.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

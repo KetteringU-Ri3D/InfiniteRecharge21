@@ -5,27 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hopper;
+package frc.robot.commands.collector;
 
-import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hopper;
+import frc.robot.subsystems.Collector;
 
-public class HopperOut extends CommandBase {
-  private final Hopper hopper;
-  private final DoubleSupplier power;
+public class CollectorArmOut extends CommandBase {
+  private final Collector collector;
 
   /**
-   * HopperOut command, allows the driver to reverse the hopper if necessary
-   * Hopper subsystem: @param hopper
-   * Power applied to the motors: @param power
+   * Creates a new CollectorArmOut.
    */
-  public HopperOut(Hopper hopper, DoubleSupplier power) {
-    this.hopper = hopper;
-    this.power = power;
-    addRequirements(hopper);
+  public CollectorArmOut(Collector collector) {
+    this.collector = collector;
+    addRequirements(collector);
   }
 
   // Called when the command is initially scheduled.
@@ -36,14 +29,13 @@ public class HopperOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("HopperOUtPower", power.getAsDouble());
-    hopper.hopperOut(power.getAsDouble());
+    collector.armIn();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    hopper.hopperStop();
+    collector.armStop();
   }
 
   // Returns true when the command should end.

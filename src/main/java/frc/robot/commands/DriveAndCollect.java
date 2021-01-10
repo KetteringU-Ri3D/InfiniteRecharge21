@@ -30,7 +30,7 @@ public class DriveAndCollect extends ParallelCommandGroup {
   public DriveAndCollect(double throttle, double rotation, double power) {
     super(
       new ArcadeDrive(drivetrain, () -> throttle, () -> rotation),
-      new Collect(collector, power)
+      new Collect(collector, () -> power)
     );
   }
 }

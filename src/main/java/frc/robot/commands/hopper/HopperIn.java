@@ -7,20 +7,22 @@
 
 package frc.robot.commands.hopper;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hopper;
 
 public class HopperIn extends CommandBase {
   private final Hopper hopper;
-  private final double power;
+  private final DoubleSupplier power;
 
   /**
    * HopperIn command, prepares the robot to shoot power cells
    * Hopper subsystem: @param hopper
    * Power applied to the motors: @param power
    */
-  public HopperIn(Hopper hopper, double power) {
+  public HopperIn(Hopper hopper, DoubleSupplier power) {
     this.hopper = hopper;
     this.power = power;
     addRequirements(hopper);
@@ -34,8 +36,8 @@ public class HopperIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("HopperInPower", power);
-    hopper.hopperIn(power);
+    SmartDashboard.putNumber("HopperInPower", power.getAsDouble());
+    hopper.hopperIn(power.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

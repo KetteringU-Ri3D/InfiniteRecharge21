@@ -10,11 +10,13 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Collector extends SubsystemBase {
   WPI_TalonSRX collectorMotor = new WPI_TalonSRX(Constants.COLLECTOR);
+  DoubleSolenoid armSolenoid = new DoubleSolenoid(Constants.ARM_OUT, Constants.ARM_IN);
 
   /**
    * Collector object
@@ -43,6 +45,27 @@ public class Collector extends SubsystemBase {
    */
   public void stopCollector(){
     collectorMotor.stopMotor();
+  }
+
+  /**
+   * Opens the collector
+   */
+  public void armOut() {
+    armSolenoid.set(DoubleSolenoid.Value.kForward);
+  }
+
+  /**
+   * Closes the collector
+   */
+  public void armIn() {
+    armSolenoid.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  /**
+   * Stops the collector arm
+   */
+  public void armStop() {
+    armSolenoid.set(DoubleSolenoid.Value.kOff);
   }
 
   @Override

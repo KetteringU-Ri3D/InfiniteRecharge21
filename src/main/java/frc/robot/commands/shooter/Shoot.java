@@ -31,10 +31,10 @@ public class Shoot extends ParallelCommandGroup {
    */
   public Shoot() {
     super(
-      new ShooterOut(shooter, shooterPower), 
-      new HopperIn(hopper, hopperPower), 
+      new ShooterOut(shooter, () -> shooterPower), 
+      new HopperIn(hopper, () -> hopperPower), 
       // new Collect(collector, collectorPower),
-      new FeederIn(shooter, feederPower)
+      new FeederIn(shooter, () -> feederPower)
     );
   }
 }
