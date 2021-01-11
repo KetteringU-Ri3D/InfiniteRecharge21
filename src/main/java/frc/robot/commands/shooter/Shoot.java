@@ -7,8 +7,13 @@
 
 package frc.robot.commands.shooter;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.collector.Collect;
 import frc.robot.commands.hopper.HopperIn;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
@@ -16,26 +21,20 @@ import frc.robot.subsystems.Shooter;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Shoot extends ParallelCommandGroup {
-  static Shooter shooter;
-  static Hopper hopper;
-  // static Collector collector;          // UNCOMMENT IF COLLECTOR IS NEEDED TO SHOOT
-  static double shooterPower = 0.5,
-                hopperPowerLeft = 0.55,
-                hopperPowerRight = 0.45,
-                /*collectorPower = 0.5,*/ // UNCOMMENT IF COLLECTOR IS NEEDED TO SHOOT
-                feederPower = 0.5;
-
-
   /**
    * Shoot command, allows the driver to score power cells with a single button
    * press rather than multiple
    */
-  public Shoot() {
+  public Shoot(Shooter shooter, DoubleSupplier shooterPower, Hopper hopper, 
+               DoubleSupplier hopperPowerLeft, DoubleSupplier hopperPowerRight,
+               Collector collector, DoubleSupplier collectorPower,
+               DoubleSupplier feederPower) {
     super(
-      new ShooterOut(shooter, () -> shooterPower), 
-      new HopperIn(hopper, () -> hopperPowerLeft, () -> hopperPowerRight), 
-      // new Collect(collector, () -> collectorPower),
-      new FeederIn(shooter, () -> feederPower)
+      new ShooterOut(shooter, shooterPower), 
+      new WaitCommand(1.5), 
+      new HopperIn(hopper, hopperPowerLeft, hopperPowerRight), 
+      new Collect(collector, collectorPower),
+      new FeederIn(shooter, feederPower)
     );
   }
 }

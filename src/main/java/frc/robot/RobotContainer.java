@@ -24,6 +24,7 @@ import frc.robot.commands.hopper.HopperIn;
 import frc.robot.commands.hopper.HopperOut;
 import frc.robot.commands.shooter.FeederIn;
 import frc.robot.commands.shooter.FeederOut;
+import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShooterIn;
 import frc.robot.commands.shooter.ShooterOut;
 import frc.robot.subsystems.Climber;
@@ -52,8 +53,8 @@ public class RobotContainer {
   JoystickAnalogButton leftTrigger = new JoystickAnalogButton(gamepad, 2);
   JoystickAnalogButton rightTrigger = new JoystickAnalogButton(gamepad, 3);
 
-  // private final Command autoCommand = new ShootInTargetZone(drivetrain);
-  private final Command autoCommand = null; // TODO: figure out why this works
+  private final Command autoCommand = new ShootInTargetZone(drivetrain, shooter, hopper, collector);
+  // private final Command autoCommand = null; // TODO: figure out why this works
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -100,7 +101,7 @@ public class RobotContainer {
 
     // Shoot balls - RT
     rightTrigger.whileHeld(new FeederIn(shooter, () -> 0.5));
-    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.55, () -> 0.45));
+    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5, () -> 0.75));
     rightTrigger.whileHeld(new Collect(collector, () -> 0.85));
 
     // Deploy intake out - A
@@ -109,11 +110,31 @@ public class RobotContainer {
     // Deploy intake in - B
     gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
 
-    // Prepare climber to hang - Y
-    gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
-    
-    // Pull robot up - X
-    gamepad.getButtonX().whileHeld(new LowerClimber(climber, () -> 1));
+    /* TEST THIS COMMAND */
+    // Spin shooter wheels for 1.5s, then shoot balls
+    gamepad.getButtonX().whileHeld(
+      new Shoot(
+        shooter, 
+        // Shooter power
+        () -> 0.75, 
+        hopper, 
+        // Hopper power left
+        () -> 0.5, 
+        // Hopper power right
+        () -> 0.7, 
+        collector, 
+        // Collector power
+        () -> 0.85, 
+        // Feeder power
+        () -> 0.5
+      )
+    );
+
+    // // Prepare climber to hang - Y
+    // gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
+
+    // // Pull robot up - X
+    // gamepad.getButtonX().whileHeld(new LowerClimber(climber, () -> 1));
   }
 
   /**
