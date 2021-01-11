@@ -21,6 +21,10 @@ import frc.robot.subsystems.Shooter;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Shoot extends ParallelCommandGroup {
+  Shooter shooter;
+  Hopper hopper;
+  Collector collector;
+
   /**
    * Shoot command, allows the driver to score power cells with a single button
    * press rather than multiple
@@ -36,5 +40,16 @@ public class Shoot extends ParallelCommandGroup {
       new Collect(collector, collectorPower),
       new FeederIn(shooter, feederPower)
     );
+    this.shooter = shooter;
+    this.hopper = hopper;
+    this.collector = collector;
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    shooter.shooterStop();
+    hopper.hopperStop();
+    collector.stopCollector();
   }
 }
