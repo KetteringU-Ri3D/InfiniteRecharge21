@@ -52,7 +52,8 @@ public class RobotContainer {
   JoystickAnalogButton leftTrigger = new JoystickAnalogButton(gamepad, 2);
   JoystickAnalogButton rightTrigger = new JoystickAnalogButton(gamepad, 3);
 
-  private final Command autoCommand = new ShootInTargetZone();
+  // private final Command autoCommand = new ShootInTargetZone(drivetrain);
+  private final Command autoCommand = null; // TODO: figure out why this works
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -189,7 +190,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
+    // Run the specified autonomous command
     return autoCommand;
   }
 }

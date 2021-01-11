@@ -16,13 +16,12 @@ import frc.robot.subsystems.Drivetrain;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class ShootInTargetZone extends SequentialCommandGroup {
-  private static Drivetrain drivetrain;
   
   /**
    * Autonomous command to drive off the initiation line into the target zone,
    * shoot, and then drive into mid-field
    */
-  public ShootInTargetZone() {
+  public ShootInTargetZone(Drivetrain drivetrain) {
     super(
       new ArcadeDrive(drivetrain, () -> 0.5, () -> 0).withTimeout(3),
       new Shoot().withTimeout(5),
