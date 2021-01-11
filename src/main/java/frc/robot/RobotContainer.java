@@ -52,8 +52,8 @@ public class RobotContainer {
   JoystickAnalogButton leftTrigger = new JoystickAnalogButton(gamepad, 2);
   JoystickAnalogButton rightTrigger = new JoystickAnalogButton(gamepad, 3);
 
-  // private final Command autoCommand = new ShootInTargetZone(drivetrain);
-  private final Command autoCommand = null; // TODO: figure out why this works
+  private final Command autoCommand = new ShootInTargetZone(drivetrain);
+  // private final Command autoCommand = null; // TODO: figure out why this works
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.

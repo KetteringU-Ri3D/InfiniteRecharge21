@@ -26,8 +26,8 @@ public class Hopper extends SubsystemBase {
    * Power applied to the motors: @param power
    */
   public void hopperIn(double powerLeft, double powerRight) {
-    hopperMotorL.set(-powerLeft);
-    hopperMotorR.set(powerRight);
+    hopperMotorL.set(powerLeft);
+    hopperMotorR.set(-powerRight);
   }
 
   /**
@@ -35,8 +35,8 @@ public class Hopper extends SubsystemBase {
    * Power applied to the motors: @param power
    */
   public void hopperOut(double powerLeft, double powerRight) {
-    hopperMotorL.set(powerLeft);
-    hopperMotorR.set(-powerRight);
+    hopperMotorL.set(-powerLeft);
+    hopperMotorR.set(powerRight);
   }
 
   /** 
