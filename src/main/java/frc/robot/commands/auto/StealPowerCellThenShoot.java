@@ -31,7 +31,7 @@ public class StealPowerCellThenShoot extends SequentialCommandGroup {
     Collector collector, Feeder feeder
   ) {
     super(
-      new DriveAndCollect(1, 0, 0.5).withTimeout(1.5),
+      new DriveAndCollect(0.75, 0, 0.85).withTimeout(1.5),
       new ArcadeDrive(drivetrain, () -> -1, () -> 0).withTimeout(4),
       new ArcadeDrive(drivetrain, () -> 0, () -> 0.5).withTimeout(2),
       new ArcadeDrive(drivetrain, () -> 0.75, () -> 0).withTimeout(4.5),
