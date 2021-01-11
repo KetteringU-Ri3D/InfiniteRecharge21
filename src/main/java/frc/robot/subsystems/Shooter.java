@@ -9,15 +9,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   WPI_TalonFX shooterMotorR = new WPI_TalonFX(Constants.SHOOTER_R);
   WPI_TalonFX shooterMotorL = new WPI_TalonFX(Constants.SHOOTER_L);
-  WPI_TalonSRX feederMotor = new WPI_TalonSRX(Constants.FEEDER);
+  VictorSP feederMotor = new VictorSP(Constants.FEEDER);
 
   /**
    * Shooter object
@@ -49,7 +49,7 @@ public class Shooter extends SubsystemBase {
    * Power applied to the motor: @param power
    */
   public void feederIn(double power) {
-    feederMotor.set(ControlMode.PercentOutput, power);
+    feederMotor.set(power);
   }
 
   /**
@@ -57,7 +57,7 @@ public class Shooter extends SubsystemBase {
    * Power applied to the motor: @param power
    */
   public void feederOut(double power) {
-    feederMotor.set(ControlMode.PercentOutput, power);
+    feederMotor.set(power);
   }
 
   /** 

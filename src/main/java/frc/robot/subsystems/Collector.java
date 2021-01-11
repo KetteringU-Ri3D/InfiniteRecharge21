@@ -7,15 +7,13 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Collector extends SubsystemBase {
-  WPI_TalonSRX collectorMotor = new WPI_TalonSRX(Constants.COLLECTOR);
+  VictorSP collectorMotor = new VictorSP(Constants.COLLECTOR);
   DoubleSolenoid armSolenoid = new DoubleSolenoid(Constants.ARM_OUT, Constants.ARM_IN);
 
   /**
@@ -29,7 +27,7 @@ public class Collector extends SubsystemBase {
    * Power applied to the motor: @param power
    */
   public void collect(double power) {
-    collectorMotor.set(ControlMode.PercentOutput, power);
+    collectorMotor.set(power);
   }
 
   /**
@@ -37,7 +35,7 @@ public class Collector extends SubsystemBase {
    * Power applied to the motor: @param power
    */
   public void eject(double power) {
-    collectorMotor.set(ControlMode.PercentOutput, -power);
+    collectorMotor.set(-power);
   }
 
   /**
