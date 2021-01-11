@@ -31,6 +31,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 import frc.robot.utils.Gamepad;
+import frc.robot.utils.JoystickAnalogButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -47,6 +48,8 @@ public class RobotContainer {
   private final Climber climber = new Climber();
 
   Gamepad gamepad = new Gamepad(Constants.GAMEPAD);
+  JoystickAnalogButton leftTrigger = new JoystickAnalogButton(gamepad, 2);
+  JoystickAnalogButton rightTrigger = new JoystickAnalogButton(gamepad, 3);
 
   private final TankDrive autoCommand = null;
 
@@ -83,49 +86,58 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Set up collector so intake is independent of the hopper.
-    gamepad.getLeftTriggerClick().whileHeld(new Collect(collector, () -> 0.75));
+    // // Set up collector so intake is independent of the hopper.
+    // // Run intake in - LT
+    // leftTrigger.whileHeld(new Collect(collector, () -> 0.75));
 
-    // Set up all eject commands so they all work from one button.
-    gamepad.getLeftShoulder().whileHeld(new Eject(collector, () -> 0.25));
-    gamepad.getLeftShoulder().whileHeld(new ShooterIn(shooter, () -> 0.5));
-    gamepad.getLeftShoulder().whileHeld(new FeederOut(shooter, () -> 0.5));
-    gamepad.getLeftShoulder().whileHeld(new HopperOut(hopper, () -> 0.5));
+    // // Set up all eject commands so they all work from one button.
+    // // Get rid of all balls - LB
+    // gamepad.getLeftShoulder().whileHeld(new Eject(collector, () -> 0.25));
+    // gamepad.getLeftShoulder().whileHeld(new ShooterIn(shooter, () -> 0.5));
+    // gamepad.getLeftShoulder().whileHeld(new FeederOut(shooter, () -> 0.5));
+    // gamepad.getLeftShoulder().whileHeld(new HopperOut(hopper, () -> 0.5));
 
-    // Set up shooter to work as a toggle.
-    gamepad.getRightShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
+    // // Set up shooter to work as a toggle.
+    // // Run Shooter - RB
+    // gamepad.getRightShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
 
-    // Set up the hopper and feeder so they work off the same button.
-    gamepad.getRightTriggerClick().whileHeld(new FeederIn(shooter, () -> 0.5));
-    gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, () -> 0.5));
+    // // Set up the hopper and feeder so they work off the same button.
+    // // Shoot balls (run indexer/hopper) - RT
+    // rightTrigger.whileHeld(new FeederIn(shooter, () -> 0.5));
+    // rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5));
+
+    // // Controls for the climber.
+    // /*
+    // gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
+    // gamepad.getButtonX().whileHeld(new LowerClimber(climber, () -> 1));
+    // */
+
+    // // Deploy intake controls - A & B
+    // gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
+    // gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
 
 
-    // Controls for the climber.
-    gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
-    gamepad.getButtonX().whileHeld(new LowerClimber(climber, () -> 1));
+    // Eric's controls because stuff was broken. 
+    // prep shooter - Left Bumper
+    gamepad.getLeftShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
 
-    // Deploy intake controls
+    // shoot balls - Right Bumper
+    gamepad.getRightShoulder().whileHeld(new ShooterOut(shooter, () -> 0.75));
+    gamepad.getRightShoulder().whileHeld(new FeederIn(shooter, () -> 0.5));
+    gamepad.getRightShoulder().whileHeld(new HopperIn(hopper, () -> 0.5));
+
+    // intake - X
+    gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.75));
+    // outtake - Y
+    gamepad.getButtonY().whileHeld(new Eject(collector, () -> 0.75));
+
+    // pneumatic controls - A & B
     gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
     gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
 
-  
-
-
-    // // Eric's controls because stuff was broken. 
-
-    // // prep shooter - Left Bumper
-    // gamepad.getLeftShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
-
-    // // shoot balls - Right Bumper
-    // gamepad.getRightShoulder().whileHeld(new FeederIn(shooter, () -> 0.5));
-    // gamepad.getRightShoulder().whileHeld(new HopperIn(hopper, () -> 0.5));
-
-    // // intake - X
-    // gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.75));
-
-    // // pneumatic controls - A & B
-    // gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
-    // gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
+    // TEST trigger
+    rightTrigger.whileHeld(new Collect(collector, () -> 0.75));
+    leftTrigger.whileHeld(new Eject(collector, () -> 0.75));
   }
 
   /**

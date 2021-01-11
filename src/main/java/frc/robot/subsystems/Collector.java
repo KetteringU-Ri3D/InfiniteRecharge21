@@ -49,14 +49,14 @@ public class Collector extends SubsystemBase {
    * Opens the collector
    */
   public void armOut() {
-    armSolenoid.set(DoubleSolenoid.Value.kReverse);
+    armSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   /**
    * Closes the collector
    */
   public void armIn() {
-    armSolenoid.set(DoubleSolenoid.Value.kForward);
+    armSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   /**
