@@ -12,8 +12,10 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.collector.Collect;
+import frc.robot.commands.feeder.FeederIn;
 import frc.robot.commands.hopper.HopperIn;
 import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
@@ -24,6 +26,7 @@ public class Shoot extends ParallelCommandGroup {
   Shooter shooter;
   Hopper hopper;
   Collector collector;
+  Feeder feeder;
 
   /**
    * Shoot command, allows the driver to score power cells with a single button
@@ -32,13 +35,13 @@ public class Shoot extends ParallelCommandGroup {
   public Shoot(Shooter shooter, DoubleSupplier shooterPower, Hopper hopper, 
                DoubleSupplier hopperPowerLeft, DoubleSupplier hopperPowerRight,
                Collector collector, DoubleSupplier collectorPower,
-               DoubleSupplier feederPower) {
+               Feeder feeder, DoubleSupplier feederPower) {
     super(
       new ShooterOut(shooter, shooterPower), 
       new WaitCommand(1.5), 
       new HopperIn(hopper, hopperPowerLeft, hopperPowerRight), 
       new Collect(collector, collectorPower),
-      new FeederIn(shooter, feederPower)
+      new FeederIn(feeder, feederPower)
     );
     this.shooter = shooter;
     this.hopper = hopper;
@@ -51,5 +54,6 @@ public class Shoot extends ParallelCommandGroup {
     shooter.shooterStop();
     hopper.hopperStop();
     collector.stopCollector();
+    feeder.feederStop();
   }
 }

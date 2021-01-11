@@ -12,6 +12,7 @@ import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 
@@ -23,7 +24,7 @@ public class ShootInTargetZone extends SequentialCommandGroup {
    * Autonomous command to drive off the initiation line into the target zone,
    * shoot, and then drive into mid-field
    */
-  public ShootInTargetZone(Drivetrain drivetrain, Shooter shooter, Hopper hopper, Collector collector) {
+  public ShootInTargetZone(Drivetrain drivetrain, Shooter shooter, Hopper hopper, Collector collector, Feeder feeder) {
     super(
       new ArcadeDrive(drivetrain, () -> 0.5, () -> 0).withTimeout(3),
       new Shoot(
@@ -39,6 +40,7 @@ public class ShootInTargetZone extends SequentialCommandGroup {
         // Collector power
         () -> 0.85, 
         // Feeder power
+        feeder,
         () -> 0.5
       ).withTimeout(5),
       new ArcadeDrive(drivetrain, () -> -0.5, () -> 0).withTimeout(4)

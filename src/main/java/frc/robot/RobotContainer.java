@@ -20,16 +20,16 @@ import frc.robot.commands.collector.CollectorArmOut;
 import frc.robot.commands.collector.Eject;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.TankDrive;
+import frc.robot.commands.feeder.FeederIn;
 import frc.robot.commands.hopper.HopperIn;
 import frc.robot.commands.hopper.HopperOut;
-import frc.robot.commands.shooter.FeederIn;
-import frc.robot.commands.shooter.FeederOut;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShooterIn;
 import frc.robot.commands.shooter.ShooterOut;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Shooter;
 import frc.robot.utils.Gamepad;
@@ -45,6 +45,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain drivetrain = new Drivetrain();
   private final Shooter shooter = new Shooter();
+  private final Feeder feeder = new Feeder();
   private final Collector collector = new Collector();
   private final Hopper hopper = new Hopper();
   private final Climber climber = new Climber();
@@ -53,7 +54,7 @@ public class RobotContainer {
   JoystickAnalogButton leftTrigger = new JoystickAnalogButton(gamepad, 2);
   JoystickAnalogButton rightTrigger = new JoystickAnalogButton(gamepad, 3);
 
-  private final Command autoCommand = new ShootInTargetZone(drivetrain, shooter, hopper, collector);
+  private final Command autoCommand = new ShootInTargetZone(drivetrain, shooter, hopper, collector, feeder);
   // private final Command autoCommand = null; // TODO: figure out why this works
 
   /**
@@ -100,7 +101,7 @@ public class RobotContainer {
     leftTrigger.whileHeld(new ShooterOut(shooter, () -> 0.75));
 
     // Shoot balls - RT
-    rightTrigger.whileHeld(new FeederIn(shooter, () -> 0.5));
+    rightTrigger.whileHeld(new FeederIn(feeder, () -> 0.5));
     rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5, () -> 0.75));
     rightTrigger.whileHeld(new Collect(collector, () -> 0.85));
 
@@ -125,10 +126,13 @@ public class RobotContainer {
         collector, 
         // Collector power
         () -> 0.85, 
+        feeder,
         // Feeder power
         () -> 0.5
       )
     );
+
+    gamepad.getButtonY().whileHeld(new HopperOut(hopper, () -> 0.4, () -> 0.4));
 
     // // Prepare climber to hang - Y
     // gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
