@@ -130,7 +130,7 @@ public class RobotContainer {
     // shoot balls - RT
     //gamepad.getRightShoulder().whileHeld(new ShooterOut(shooter, () -> 0.75));
     rightTrigger.whileHeld(new FeederIn(shooter, () -> 0.5));
-    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5));
+    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.55, () -> 0.45));
 
     // intake - X
     gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.85));

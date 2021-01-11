@@ -15,26 +15,26 @@ import frc.robot.subsystems.Hopper;
 
 public class HopperOut extends CommandBase {
   private final Hopper hopper;
-  // private final DoubleSupplier powerLeft, powerRight;
-  private final DoubleSupplier power;
+  private final DoubleSupplier powerLeft, powerRight;
+  // private final DoubleSupplier power;
 
   /**
    * HopperOut command, allows the driver to reverse the hopper if necessary
    * Hopper subsystem: @param hopper
    * Power applied to the motors: @param power
    */
-  // public HopperIn(Hopper hopper, DoubleSupplier powerLeft, DoubleSupplier powerRight) {
-  //   this.hopper = hopper;
-  //   this.powerLeft = powerLeft;
-  //   this.powerRight = powerRight;
-  //   addRequirements(hopper);
-  // }
-
-  public HopperOut(Hopper hopper, DoubleSupplier power) {
+  public HopperOut(Hopper hopper, DoubleSupplier powerLeft, DoubleSupplier powerRight) {
     this.hopper = hopper;
-    this.power = power;
+    this.powerLeft = powerLeft;
+    this.powerRight = powerRight;
     addRequirements(hopper);
   }
+
+  // public HopperOut(Hopper hopper, DoubleSupplier power) {
+  //   this.hopper = hopper;
+  //   this.power = power;
+  //   addRequirements(hopper);
+  // }
 
   // Called when the command is initially scheduled.
   @Override
@@ -44,8 +44,8 @@ public class HopperOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("HopperOUtPower", power.getAsDouble());
-    hopper.hopperOut(power.getAsDouble());
+    SmartDashboard.putNumber("HopperOUtPower", powerLeft.getAsDouble());
+    hopper.hopperOut(powerLeft.getAsDouble(), powerRight.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

@@ -25,18 +25,18 @@ public class Hopper extends SubsystemBase {
    * Spins the hopper motors inward, moving power cells into the shooter
    * Power applied to the motors: @param power
    */
-  public void hopperIn(double power) {
-    hopperMotorL.set(-power);
-    hopperMotorR.set(power);
+  public void hopperIn(double powerLeft, double powerRight) {
+    hopperMotorL.set(-powerLeft);
+    hopperMotorR.set(powerRight);
   }
 
   /**
    * Spins the hopper motors outward, moving power cells towards the collector
    * Power applied to the motors: @param power
    */
-  public void hopperOut(double power) {
-    hopperMotorL.set(power);
-    hopperMotorR.set(-power);
+  public void hopperOut(double powerLeft, double powerRight) {
+    hopperMotorL.set(powerLeft);
+    hopperMotorR.set(-powerRight);
   }
 
   /** 
