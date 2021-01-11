@@ -8,8 +8,8 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.DriveAndCollect;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.drivetrain.DriveAndCollect;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.subsystems.Collector;
 // import frc.robot.commands.drivetrain.TurnToAngle;
@@ -27,7 +27,10 @@ public class StealPowerCellThenShoot extends SequentialCommandGroup {
    * Autonomous command to drive off the initiation line into the opposing
    * trench run, steal a power cell, then drive to the target zone and shoot
    */
-  public StealPowerCellThenShoot(Drivetrain drivetrain, Shooter shooter, Hopper hopper, Collector collector, Feeder feeder) {
+  public StealPowerCellThenShoot(
+    Drivetrain drivetrain, Shooter shooter, Hopper hopper, 
+    Collector collector, Feeder feeder
+  ) {
     super(
       new DriveAndCollect(1, 0, 0.5).withTimeout(1.5),
       new ArcadeDrive(drivetrain, () -> -1, () -> 0).withTimeout(4),

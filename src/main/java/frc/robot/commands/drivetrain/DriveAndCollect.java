@@ -5,11 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.collector.Collect;
-import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 
