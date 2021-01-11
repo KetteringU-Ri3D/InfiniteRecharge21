@@ -15,19 +15,27 @@ import frc.robot.subsystems.Hopper;
 
 public class HopperIn extends CommandBase {
   private final Hopper hopper;
-  private final DoubleSupplier powerLeft, powerRight;
+  // private final DoubleSupplier powerLeft, powerRight;
+  private final DoubleSupplier power;
 
   /**
    * HopperIn command, prepares the robot to shoot power cells
    * Hopper subsystem: @param hopper
    * Power applied to the motors: @param power
    */
-  public HopperIn(Hopper hopper, DoubleSupplier powerLeft, DoubleSupplier powerRight) {
+  // public HopperIn(Hopper hopper, DoubleSupplier powerLeft, DoubleSupplier powerRight) {
+  //   this.hopper = hopper;
+  //   this.powerLeft = powerLeft;
+  //   this.powerRight = powerRight;
+  //   addRequirements(hopper);
+  // }
+
+  public HopperIn(Hopper hopper, DoubleSupplier power) {
     this.hopper = hopper;
-    this.powerLeft = powerLeft;
-    this.powerRight = powerRight;
+    this.power = power;
     addRequirements(hopper);
   }
+  
 
   // Called when the command is initially scheduled.
   @Override
@@ -37,8 +45,8 @@ public class HopperIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("HopperInPower", powerLeft.getAsDouble());
-    hopper.hopperIn(powerLeft.getAsDouble(), powerRight.getAsDouble());
+    SmartDashboard.putNumber("HopperInPower", power.getAsDouble());
+    hopper.hopperIn(power.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
