@@ -29,7 +29,7 @@ public class CollectorArmOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    collector.armIn();
+    collector.armOut();
   }
 
   // Called once the command ends or is interrupted.

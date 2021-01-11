@@ -8,14 +8,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Hopper extends SubsystemBase {
-  WPI_TalonSRX hopperMotorL = new WPI_TalonSRX(Constants.HOPPER_L);
-  WPI_TalonSRX hopperMotorR = new WPI_TalonSRX(Constants.HOPPER_R);
+  VictorSP hopperMotorL = new VictorSP(Constants.HOPPER_L);
+  VictorSP hopperMotorR = new VictorSP(Constants.HOPPER_R);
 
   /**
    * Hopper object
@@ -28,8 +28,8 @@ public class Hopper extends SubsystemBase {
    * Power applied to the motors: @param power
    */
   public void hopperIn(double power) {
-    hopperMotorL.set(ControlMode.PercentOutput, -power);
-    hopperMotorR.set(ControlMode.PercentOutput, power);
+    hopperMotorL.set(-power);
+    hopperMotorR.set(power);
   }
 
   /**
@@ -37,8 +37,8 @@ public class Hopper extends SubsystemBase {
    * Power applied to the motors: @param power
    */
   public void hopperOut(double power) {
-    hopperMotorL.set(ControlMode.PercentOutput, power);
-    hopperMotorR.set(ControlMode.PercentOutput, -power);
+    hopperMotorL.set(power);
+    hopperMotorR.set(-power);
   }
 
   /** 

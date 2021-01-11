@@ -33,8 +33,8 @@ public final class Constants {
     public static final int ARM_IN = 1;
 
     // Hopper motors
-    public static final int HOPPER_R = 8;
-    public static final int HOPPER_L = 9;
+    public static final int HOPPER_R = 3;
+    public static final int HOPPER_L = 0;
 
     // Climber motor
     public static final int CLIMBER = 11;
