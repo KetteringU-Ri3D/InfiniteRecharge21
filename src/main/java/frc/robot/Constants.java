@@ -25,19 +25,19 @@ public final class Constants {
     // Shooter motors
     public static final int SHOOTER_R = 5;
     public static final int SHOOTER_L = 6;
-    public static final int FEEDER = 10;
+    public static final int FEEDER = 1;
     
     // Collector motor and solenoid
-    public static final int COLLECTOR = 7;
+    public static final int COLLECTOR = 4;
     public static final int ARM_OUT = 1;
     public static final int ARM_IN = 2;
 
     // Hopper motors
-    public static final int HOPPER_R = 3;
-    public static final int HOPPER_L = 0;
+    public static final int HOPPER_R = 0;
+    public static final int HOPPER_L = 3;
 
     // Climber motor
-    public static final int CLIMBER = 11;
+    public static final int CLIMBER = 2;
 
     // Gamepad
     public static final int GAMEPAD = 0;
