@@ -96,9 +96,9 @@ public class RobotContainer {
     gamepad.getLeftTriggerClick().whileHeld(new HopperOut(hopper, () -> 0.5));
 
     // Set up the hopper and shooter so they work off the same button.
-    gamepad.getRightTriggerClick().whileHeld(new Shoot());
-    // gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, 50));
-    // gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, 50));
+    // gamepad.getRightTriggerClick().whileHeld(new Shoot());
+    gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, () -> 0.5));
+    gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, () -> 0.5));
 
     // Controls for the climber.
     gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
