@@ -1,19 +1,13 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands.shooter;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.collector.Collect;
-import frc.robot.commands.feeder.FeederIn;
-import frc.robot.commands.hopper.HopperIn;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Hopper;
@@ -21,39 +15,24 @@ import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class Shoot extends ParallelCommandGroup {
-  Shooter shooter;
-  Hopper hopper;
-  Collector collector;
-  Feeder feeder;
-
-  /**
-   * Shoot command, allows the driver to score power cells with a single button
-   * press rather than multiple
-   */
-  public Shoot(Shooter shooter, DoubleSupplier shooterPower, Hopper hopper, 
-               DoubleSupplier hopperPowerLeft, DoubleSupplier hopperPowerRight,
-               Collector collector, DoubleSupplier collectorPower,
-               Feeder feeder, DoubleSupplier feederPower) {
-    super(
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class Shoot extends SequentialCommandGroup {
+  /** Creates a new Shoot. */
+  public Shoot(
+    Shooter shooter, DoubleSupplier shooterPower,
+    Hopper hopper, DoubleSupplier hopperPowerLeft, DoubleSupplier hopperPowerRight,
+    Collector collector, DoubleSupplier collectorPower,
+    Feeder feeder, DoubleSupplier feederPower) {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(
       new ShooterOut(shooter, shooterPower), 
       new WaitCommand(1.5), 
-      new HopperIn(hopper, hopperPowerLeft, hopperPowerRight), 
-      new Collect(collector, collectorPower),
-      new FeederIn(feeder, feederPower)
+      new FeedCellsToShooter(
+        hopper, hopperPowerLeft, hopperPowerRight, 
+        collector, collectorPower, 
+        feeder, feederPower
+      )
     );
-    this.shooter = shooter;
-    this.hopper = hopper;
-    this.collector = collector;
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    shooter.shooterStop();
-    hopper.hopperStop();
-    collector.stopCollector();
-    feeder.feederStop();
   }
 }
