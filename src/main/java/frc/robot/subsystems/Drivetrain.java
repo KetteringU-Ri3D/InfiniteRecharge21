@@ -11,11 +11,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+// import edu.wpi.first.wpilibj.interfaces.Gyro;
+// import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -30,7 +30,7 @@ public class Drivetrain extends SubsystemBase {
 
   DifferentialDrive drive = new DifferentialDrive(driveLeft, driveRight);
 
-  Gyro gyro = new ADXRS450_Gyro(SPI.Port.kMXP);
+  // Gyro gyro = new ADXRS450_Gyro(SPI.Port.kMXP);
 
   /**
    * Drivetrain object
@@ -68,27 +68,27 @@ public class Drivetrain extends SubsystemBase {
     drive.stopMotor();
   }
 
-  /**
-   * Resets the heading of the gyro to simplify code
-   */
-  public void zeroHeading() {
-    gyro.reset();
-  }
+  // /**
+  //  * Resets the heading of the gyro to simplify code
+  //  */
+  // public void zeroHeading() {
+  //   gyro.reset();
+  // }
 
-  /**
-   * Returns the heading of the robot
-   */
-  public double getHeading() {
-    return Math.IEEEremainder(gyro.getAngle(), 360) * 
-          (Constants.GYRO_REVERSED ? -1.0 : 1.0);  
-  }
+  // /**
+  //  * Returns the heading of the robot
+  //  */
+  // public double getHeading() {
+  //   return Math.IEEEremainder(gyro.getAngle(), 360) * 
+  //         (Constants.GYRO_REVERSED ? -1.0 : 1.0);  
+  // }
 
-  /**
-   * Returns the turn rate of the robot
-   */
-  public double getTurnRate() {
-    return gyro.getRate() * (Constants.GYRO_REVERSED ? -1.0 : 1.0);
-  }
+  // /**
+  //  * Returns the turn rate of the robot
+  //  */
+  // public double getTurnRate() {
+  //   return gyro.getRate() * (Constants.GYRO_REVERSED ? -1.0 : 1.0);
+  // }
 
   @Override
   public void periodic() {
