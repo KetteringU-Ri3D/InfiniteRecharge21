@@ -120,15 +120,19 @@ public class RobotContainer {
 
     // Eric's controls because stuff was broken. 
     // prep shooter - Left Bumper
-    gamepad.getLeftShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
+    //gamepad.getLeftShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
+    //gamepad.getLeftShoulder().whileHeld(new ShooterOut(shooter, () -> 0.75));
 
-    // shoot balls - Right Bumper
-    gamepad.getRightShoulder().whileHeld(new ShooterOut(shooter, () -> 0.75));
-    gamepad.getRightShoulder().whileHeld(new FeederIn(shooter, () -> 0.5));
-    gamepad.getRightShoulder().whileHeld(new HopperIn(hopper, () -> 0.5));
+    // Run shooter motor - LT
+    leftTrigger.whileHeld(new ShooterOut(shooter, () -> 0.75));
+
+    // shoot balls - RT
+    //gamepad.getRightShoulder().whileHeld(new ShooterOut(shooter, () -> 0.75));
+    rightTrigger.whileHeld(new FeederIn(shooter, () -> 0.5));
+    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.55, () -> 0.45));
 
     // intake - X
-    gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.75));
+    gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.85));
     // outtake - Y
     gamepad.getButtonY().whileHeld(new Eject(collector, () -> 0.75));
 
@@ -136,9 +140,8 @@ public class RobotContainer {
     gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
     gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
 
-    // TEST trigger
-    rightTrigger.whileHeld(new Collect(collector, () -> 0.75));
-    leftTrigger.whileHeld(new Eject(collector, () -> 0.75));
+    // Run intake - RB
+    gamepad.getRightShoulder().whileHeld(new Collect(collector, () -> 0.75));
   }
 
   /**

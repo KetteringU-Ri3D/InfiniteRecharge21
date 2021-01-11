@@ -10,8 +10,8 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveAndCollect;
 import frc.robot.commands.drivetrain.ArcadeDrive;
-// import frc.robot.commands.drivetrain.TurnToAngle;
 import frc.robot.commands.shooter.Shoot;
+// import frc.robot.commands.drivetrain.TurnToAngle;
 import frc.robot.subsystems.Drivetrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

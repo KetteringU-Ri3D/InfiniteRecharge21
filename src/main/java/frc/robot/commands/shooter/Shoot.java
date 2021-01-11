@@ -20,7 +20,8 @@ public class Shoot extends ParallelCommandGroup {
   static Hopper hopper;
   // static Collector collector;          // UNCOMMENT IF COLLECTOR IS NEEDED TO SHOOT
   static double shooterPower = 0.5,
-                hopperPower = 0.5,
+                hopperLeftPower = 0.55,
+                hopperRightPower = 0.45,
                 /*collectorPower = 0.5,*/ // UNCOMMENT IF COLLECTOR IS NEEDED TO SHOOT
                 feederPower = 0.5;
 
@@ -32,7 +33,7 @@ public class Shoot extends ParallelCommandGroup {
   public Shoot() {
     super(
       new ShooterOut(shooter, () -> shooterPower), 
-      new HopperIn(hopper, () -> hopperPower), 
+      new HopperIn(hopper, () -> hopperLeftPower, () -> hopperRightPower), 
       // new Collect(collector, () -> collectorPower),
       new FeederIn(shooter, () -> feederPower)
     );
