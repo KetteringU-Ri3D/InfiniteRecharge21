@@ -52,8 +52,8 @@ public class RobotContainer {
   JoystickAnalogButton leftTrigger = new JoystickAnalogButton(gamepad, 2);
   JoystickAnalogButton rightTrigger = new JoystickAnalogButton(gamepad, 3);
 
-  private final Command autoCommand = new ShootInTargetZone(drivetrain);
-  // private final Command autoCommand = null; // TODO: figure out why this works
+  // private final Command autoCommand = new ShootInTargetZone(drivetrain);
+  private final Command autoCommand = null; // TODO: figure out why this works
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -131,6 +131,7 @@ public class RobotContainer {
     //gamepad.getRightShoulder().whileHeld(new ShooterOut(shooter, () -> 0.75));
     rightTrigger.whileHeld(new FeederIn(shooter, () -> 0.5));
     rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.55, () -> 0.45));
+    rightTrigger.whileHeld(new Collect(collector, () -> 0.85));
 
     // intake - X
     gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.85));
