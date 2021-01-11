@@ -29,8 +29,8 @@ public final class Constants {
     
     // Collector motor and solenoid
     public static final int COLLECTOR = 7;
-    public static final int ARM_OUT = 0;
-    public static final int ARM_IN = 1;
+    public static final int ARM_OUT = 1;
+    public static final int ARM_IN = 2;
 
     // Hopper motors
     public static final int HOPPER_R = 3;

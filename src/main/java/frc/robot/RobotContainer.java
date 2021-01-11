@@ -84,26 +84,21 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-    // Controls for the collector and shooter.
-
     // Set up collector so intake is independent of the hopper.
-    gamepad.getRightShoulder().whileHeld(new Collect(collector, () -> 0.25));
+    gamepad.getLeftTriggerClick().whileHeld(new Collect(collector, () -> 0.25));
 
     // Set up all eject commands so they all work from one button.
-    gamepad.getRightTriggerClick().whileHeld(new Eject(collector, () -> 0.25));
-    gamepad.getRightTriggerClick().whileHeld(new ShooterIn(shooter, () -> 0.5));
-    gamepad.getRightTriggerClick().whileHeld(new FeederOut(shooter, () -> 0.5));
-    gamepad.getRightTriggerClick().whileHeld(new HopperOut(hopper, () -> 0.5));
+    gamepad.getLeftShoulder().whileHeld(new Eject(collector, () -> 0.25));
+    gamepad.getLeftShoulder().whileHeld(new ShooterIn(shooter, () -> 0.5));
+    gamepad.getLeftShoulder().whileHeld(new FeederOut(shooter, () -> 0.5));
+    gamepad.getLeftShoulder().whileHeld(new HopperOut(hopper, () -> 0.5));
 
     // Set up shooter to work as a toggle.
-    gamepad.getLeftShoulder().whenPressed(new ShooterOut(shooter, () -> 0.75));
+    gamepad.getRightShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
 
     // Set up the hopper and feeder so they work off the same button.
-    // gamepad.getRightTriggerClick().whileHeld(new Shoot());
-    // gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, () -> 0.5));
-    gamepad.getLeftTriggerClick().whileHeld(new FeederIn(shooter, () -> 0.5));
-    gamepad.getLeftTriggerClick().whileHeld(new HopperIn(hopper, () -> 0.5));
+    gamepad.getRightTriggerClick().whileHeld(new FeederIn(shooter, () -> 0.5));
+    gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, () -> 0.5));
 
     // Controls for the climber.
     gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
