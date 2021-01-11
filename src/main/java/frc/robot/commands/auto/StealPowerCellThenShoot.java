@@ -10,6 +10,7 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.DriveAndCollect;
+import frc.robot.commands.drivetrain.TurnToAngle;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.subsystems.Collector;
 // import frc.robot.commands.drivetrain.TurnToAngle;
@@ -34,9 +35,9 @@ public class StealPowerCellThenShoot extends SequentialCommandGroup {
     super(
       new DriveAndCollect(1, 0, 0.5).withTimeout(1.5),
       new ArcadeDrive(drivetrain, () -> -1, () -> 0).withTimeout(4),
-      // new TurnToAngle(drivetrain, -90),
+      new TurnToAngle(drivetrain, -90),
       new ArcadeDrive(drivetrain, () -> 0.75, () -> 0).withTimeout(4.5),
-      // new TurnToAngle(drivetrain, -90),
+      new TurnToAngle(drivetrain, -90),
       new ArcadeDrive(drivetrain, () -> 0.5, () -> 0).withTimeout(2),
       new Shoot(
         shooter, 
