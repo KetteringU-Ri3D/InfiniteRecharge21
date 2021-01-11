@@ -21,6 +21,7 @@ import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.TankDrive;
 import frc.robot.commands.hopper.HopperIn;
 import frc.robot.commands.hopper.HopperOut;
+import frc.robot.commands.shooter.FeederIn;
 import frc.robot.commands.shooter.FeederOut;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShooterIn;
@@ -90,15 +91,19 @@ public class RobotContainer {
     gamepad.getRightShoulder().whileHeld(new Collect(collector, () -> 0.25));
 
     // Set up all eject commands so they all work from one button.
-    gamepad.getLeftTriggerClick().whileHeld(new Eject(collector, () -> 0.25));
-    gamepad.getLeftTriggerClick().whileHeld(new ShooterIn(shooter, () -> 0.5));
-    gamepad.getLeftTriggerClick().whileHeld(new FeederOut(shooter, () -> 0.5));
-    gamepad.getLeftTriggerClick().whileHeld(new HopperOut(hopper, () -> 0.5));
+    gamepad.getRightTriggerClick().whileHeld(new Eject(collector, () -> 0.25));
+    gamepad.getRightTriggerClick().whileHeld(new ShooterIn(shooter, () -> 0.5));
+    gamepad.getRightTriggerClick().whileHeld(new FeederOut(shooter, () -> 0.5));
+    gamepad.getRightTriggerClick().whileHeld(new HopperOut(hopper, () -> 0.5));
 
-    // Set up the hopper and shooter so they work off the same button.
+    // Set up shooter to work as a toggle.
+    gamepad.getLeftShoulder().whenPressed(new ShooterOut(shooter, () -> 0.75));
+
+    // Set up the hopper and feeder so they work off the same button.
     // gamepad.getRightTriggerClick().whileHeld(new Shoot());
-    gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, () -> 0.5));
-    gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, () -> 0.5));
+    // gamepad.getRightTriggerClick().whileHeld(new ShooterOut(shooter, () -> 0.5));
+    gamepad.getLeftTriggerClick().whileHeld(new FeederIn(shooter, () -> 0.5));
+    gamepad.getLeftTriggerClick().whileHeld(new HopperIn(hopper, () -> 0.5));
 
     // Controls for the climber.
     gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
