@@ -7,7 +7,6 @@ package frc.robot.commands.shooter;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Feeder;
 import frc.robot.subsystems.Hopper;
@@ -23,16 +22,13 @@ public class Shoot extends SequentialCommandGroup {
     Hopper hopper, DoubleSupplier hopperPowerLeft, DoubleSupplier hopperPowerRight,
     Collector collector, DoubleSupplier collectorPower,
     Feeder feeder, DoubleSupplier feederPower) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ShooterOut(shooter, shooterPower), 
-      new WaitCommand(1.5), 
+      new ShooterOut(shooter, shooterPower).withTimeout(3.5), 
       new FeedCellsToShooter(
         hopper, hopperPowerLeft, hopperPowerRight, 
         collector, collectorPower, 
         feeder, feederPower
-      )
+      ).alongWith(new ShooterOut(shooter, shooterPower))
     );
   }
 }

@@ -97,23 +97,9 @@ public class RobotContainer {
     // Run outtake - RB
     gamepad.getRightShoulder().whileHeld(new Eject(collector, () -> 0.75));
 
-    // Run shooter motor - LT
-    leftTrigger.whileHeld(new ShooterOut(shooter, () -> 0.75));
-
-    // Shoot balls - RT
-    rightTrigger.whileHeld(new FeederIn(feeder, () -> 0.5));
-    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5, () -> 0.75));
-    rightTrigger.whileHeld(new Collect(collector, () -> 0.85));
-
-    // Deploy intake out - A
-    gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
-
-    // Deploy intake in - B
-    gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
-
-    /* TEST THIS COMMAND */
-    // Spin shooter wheels for 1.5s, then shoot balls
-    gamepad.getButtonX().whileHeld(
+    // Shooting sequence whole - LT
+    // Spin shooter wheels for 3.5s, then shoot balls
+    leftTrigger.toggleWhenPressed(
       new Shoot(
         shooter, 
         // Shooter power
@@ -132,7 +118,25 @@ public class RobotContainer {
       )
     );
 
+    // Shoot balls - RT
+    rightTrigger.whileHeld(new FeederIn(feeder, () -> 0.5));
+    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5, () -> 0.75));
+    rightTrigger.whileHeld(new Collect(collector, () -> 0.85));
+
+    // Deploy intake out - A
+    gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
+
+    // Deploy intake in - B
+    gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
+
+    // Run shooter motor (backup) - X
+    gamepad.getButtonX().whileHeld(new ShooterOut(shooter, () -> 0.75));
+
+    // reverse hopper - Y
     gamepad.getButtonY().whileHeld(new HopperOut(hopper, () -> 0.4, () -> 0.4));
+
+
+    // Not in use controls
 
     // // Prepare climber to hang - Y
     // gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
