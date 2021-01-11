@@ -30,8 +30,8 @@ public class Shooter extends SubsystemBase {
    * Power applied to the motors: @param power
    */
   public void shooterIn(double power) {
-    shooterMotorL.set(ControlMode.PercentOutput, -power);
-    shooterMotorR.set(ControlMode.PercentOutput, power);
+    shooterMotorL.set(ControlMode.PercentOutput, power);
+    shooterMotorR.set(ControlMode.PercentOutput, -power);
   }
 
   /**
@@ -39,8 +39,8 @@ public class Shooter extends SubsystemBase {
    * Power applied to the motors: @param power
    */
   public void shooterOut(double power) {
-    shooterMotorL.set(ControlMode.PercentOutput, power);
-    shooterMotorR.set(ControlMode.PercentOutput, -power);
+    shooterMotorL.set(ControlMode.PercentOutput, -power);
+    shooterMotorR.set(ControlMode.PercentOutput, power);
   }
 
   /**

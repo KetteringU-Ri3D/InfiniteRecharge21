@@ -23,7 +23,6 @@ import frc.robot.commands.hopper.HopperIn;
 import frc.robot.commands.hopper.HopperOut;
 import frc.robot.commands.shooter.FeederIn;
 import frc.robot.commands.shooter.FeederOut;
-import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShooterIn;
 import frc.robot.commands.shooter.ShooterOut;
 import frc.robot.subsystems.Climber;
@@ -84,9 +83,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    /*
     // Set up collector so intake is independent of the hopper.
-    gamepad.getLeftTriggerClick().whileHeld(new Collect(collector, () -> 0.25));
+    gamepad.getLeftTriggerClick().whileHeld(new Collect(collector, () -> 0.75));
 
     // Set up all eject commands so they all work from one button.
     gamepad.getLeftShoulder().whileHeld(new Eject(collector, () -> 0.25));
@@ -110,24 +108,24 @@ public class RobotContainer {
     gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
     gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
 
-    */
+  
 
 
-    // Eric's controls because stuff was broken. 
+    // // Eric's controls because stuff was broken. 
 
-    // prep shooter - Left Bumper
-    gamepad.getLeftShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
+    // // prep shooter - Left Bumper
+    // gamepad.getLeftShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
 
-    // shoot balls - Right Bumper
-    gamepad.getRightShoulder().whileHeld(new FeederIn(shooter, () -> 0.5));
-    gamepad.getRightShoulder().whileHeld(new HopperIn(hopper, () -> 0.5));
+    // // shoot balls - Right Bumper
+    // gamepad.getRightShoulder().whileHeld(new FeederIn(shooter, () -> 0.5));
+    // gamepad.getRightShoulder().whileHeld(new HopperIn(hopper, () -> 0.5));
 
-    // intake - X
-    gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.25));
+    // // intake - X
+    // gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.75));
 
-    // pneumatic controls - A & B
-    gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
-    gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
+    // // pneumatic controls - A & B
+    // gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
+    // gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
   }
 
   /**
