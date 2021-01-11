@@ -84,6 +84,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    /*
     // Set up collector so intake is independent of the hopper.
     gamepad.getLeftTriggerClick().whileHeld(new Collect(collector, () -> 0.25));
 
@@ -100,11 +101,31 @@ public class RobotContainer {
     gamepad.getRightTriggerClick().whileHeld(new FeederIn(shooter, () -> 0.5));
     gamepad.getRightTriggerClick().whileHeld(new HopperIn(hopper, () -> 0.5));
 
+
     // Controls for the climber.
     gamepad.getButtonY().whileHeld(new RaiseClimber(climber, () -> 1));
     gamepad.getButtonX().whileHeld(new LowerClimber(climber, () -> 1));
 
-    // Temporary pneumatic controls
+    // Deploy intake controls
+    gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
+    gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
+
+    */
+
+
+    // Eric's controls because stuff was broken. 
+
+    // prep shooter - Left Bumper
+    gamepad.getLeftShoulder().toggleWhenPressed(new ShooterOut(shooter, () -> 0.75));
+
+    // shoot balls - Right Bumper
+    gamepad.getRightShoulder().whileHeld(new FeederIn(shooter, () -> 0.5));
+    gamepad.getRightShoulder().whileHeld(new HopperIn(hopper, () -> 0.5));
+
+    // intake - X
+    gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.25));
+
+    // pneumatic controls - A & B
     gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
     gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
   }
