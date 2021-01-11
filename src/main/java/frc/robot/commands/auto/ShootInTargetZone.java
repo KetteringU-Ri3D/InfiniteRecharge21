@@ -8,6 +8,7 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.collector.CollectorArmOut;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.subsystems.Collector;
@@ -26,7 +27,9 @@ public class ShootInTargetZone extends SequentialCommandGroup {
    */
   public ShootInTargetZone(Drivetrain drivetrain, Shooter shooter, Hopper hopper, Collector collector, Feeder feeder) {
     super(
-      new ArcadeDrive(drivetrain, () -> 0.5, () -> 0).withTimeout(3),
+      new ArcadeDrive(drivetrain, () -> 0.5, () -> 0).withTimeout(3).alongWith(
+        new CollectorArmOut(collector).withTimeout(0.1)
+      ),
       new Shoot(
         shooter, 
         // Shooter power

@@ -8,6 +8,7 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.collector.CollectorArmOut;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.DriveAndCollect;
 import frc.robot.commands.shooter.Shoot;
@@ -31,6 +32,7 @@ public class StealPowerCellThenShoot extends SequentialCommandGroup {
     Collector collector, Feeder feeder
   ) {
     super(
+      new CollectorArmOut(collector),
       new DriveAndCollect(0.75, 0, 0.85).withTimeout(1.5),
       new ArcadeDrive(drivetrain, () -> -1, () -> 0).withTimeout(4),
       new ArcadeDrive(drivetrain, () -> 0, () -> 0.5).withTimeout(2),
