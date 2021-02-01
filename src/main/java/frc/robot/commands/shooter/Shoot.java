@@ -23,12 +23,13 @@ public class Shoot extends SequentialCommandGroup {
     Collector collector, DoubleSupplier collectorPower,
     Feeder feeder, DoubleSupplier feederPower) {
     addCommands(
-      new ShooterOut(shooter, shooterPower).withTimeout(3.5), 
+      new ShooterOut(shooter, shooterPower).withTimeout(4.5), 
       new FeedCellsToShooter(
         hopper, hopperPowerLeft, hopperPowerRight, 
         collector, collectorPower, 
         feeder, feederPower
       ).alongWith(new ShooterOut(shooter, shooterPower))
     );
+    // controlmode.velocity
   }
 }

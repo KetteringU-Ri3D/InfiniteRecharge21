@@ -28,7 +28,7 @@ public class ShootInTargetZone extends SequentialCommandGroup {
   public ShootInTargetZone(Drivetrain drivetrain, Shooter shooter, Hopper hopper, Collector collector, Feeder feeder) {
     super(
       new ArcadeDrive(drivetrain, () -> 0.5, () -> 0).withTimeout(3).alongWith(
-        new CollectorArmOut(collector).withTimeout(0.1)
+        new CollectorArmOut(collector).withTimeout(0.5)
       ),
       new Shoot(
         shooter, 
@@ -45,8 +45,34 @@ public class ShootInTargetZone extends SequentialCommandGroup {
         // Feeder power
         feeder,
         () -> 0.5
-      ).withTimeout(5),
+      ).withTimeout(7),
       new ArcadeDrive(drivetrain, () -> -0.5, () -> 0).withTimeout(4)
     );
+
+    /*
+    super(
+      new CollectorArmOut(collector),
+      new Shoot(
+        shooter, 
+        // Shooter power
+        () -> 0.75, 
+        hopper, 
+        // Hopper power left
+        () -> 0.5, 
+        // Hopper power right
+        () -> 0.7, 
+        collector, 
+        // Collector power
+        () -> 0.85, 
+        // Feeder power
+        feeder,
+        () -> 0.5
+      ).alongWith(
+      new ArcadeDrive(drivetrain, () -> 0.5, () -> 0).withTimeout(3)),
+      
+      new ArcadeDrive(drivetrain, () -> -0.5, () -> 0).withTimeout(4)
+    );
+    */
+
   }
 }

@@ -102,7 +102,7 @@ public class RobotContainer {
       new Shoot(
         shooter, 
         // Shooter power
-        () -> 0.75, 
+        () -> 0.60, 
         hopper, 
         // Hopper power left
         () -> 0.5, 
@@ -117,10 +117,12 @@ public class RobotContainer {
       )
     );
 
-    // Shoot balls - RT
-    rightTrigger.whileHeld(new FeederIn(feeder, () -> 0.5));
-    rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5, () -> 0.75));
-    rightTrigger.whileHeld(new Collect(collector, () -> 0.85));
+     // Shoot balls - RT
+    // rightTrigger.whileHeld(new FeederIn(feeder, () -> 0.5));
+    // rightTrigger.whileHeld(new HopperIn(hopper, () -> 0.5, () -> 0.75));
+    // rightTrigger.whileHeld(new Collect(collector, () -> 0.85));
+
+    rightTrigger.whileHeld(new ShooterOut(shooter, () -> 0.75));
 
     // Deploy intake out - A
     gamepad.getButtonA().whenPressed(new CollectorArmOut(collector));
@@ -129,12 +131,18 @@ public class RobotContainer {
     gamepad.getButtonB().whenPressed(new CollectorArmIn(collector));
 
     // Run shooter motor (backup) - X
-    gamepad.getButtonX().whileHeld(new ShooterOut(shooter, () -> 0.75));
+    //gamepad.getButtonX().whileHeld(new ShooterOut(shooter, () -> 0.75));
+
+    gamepad.getButtonX().whileHeld(new FeederIn(feeder, () -> 0.5));
+    gamepad.getButtonX().whileHeld(new HopperIn(hopper, () -> 0.75, () -> -0.4));
+    gamepad.getButtonX().whileHeld(new Collect(collector, () -> 0.85));
+
 
     // reverse hopper - Y
-    gamepad.getButtonY().whileHeld(new HopperOut(hopper, () -> 0.4, () -> 0.4));
+     gamepad.getButtonY().whileHeld(new HopperOut(hopper, () -> 0.4, () -> 0.4));
+    //gamepad.getButtonY().whileHeld(new HopperIn(hopper, () -> 0.7, () -> -0.3));
 
-
+    
     // Not in use controls
 
     // // Prepare climber to hang - Y
